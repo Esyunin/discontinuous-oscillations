@@ -1,0 +1,197 @@
+\documentclass[a4paper,14pt]{extarticle}
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage{misccorr} % в заголовках появляется точка, но при ссылке на них ее нет
+\usepackage{amssymb,amsfonts,amsmath,amsthm}  
+\usepackage{indentfirst}
+\usepackage[usenames,dvipsnames]{color} 
+\usepackage[unicode,hidelinks]{hyperref}
+% \hypersetup{%
+%     pdfborder = {0 0 0}
+% }
+
+\usepackage{makecell,multirow} 
+\usepackage{ulem}
+\usepackage{graphicx,wrapfig}
+\graphicspath{{img/}}
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=3cm,bottom=3cm,bindingoffset=0cm,headheight=15pt}
+\usepackage{fancyhdr} 
+\linespread{1.05} 
+\frenchspacing 
+\renewcommand{\labelenumii}{\theenumii)} 
+\newcommand{\mean}[1]{\langle#1\rangle}
+% \usepackage{caption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\labauthors{Есюнин Д.В., Есюнин М.В.}
+\def\labgroup{430}
+% \def\department{Кафедра электроники и квантовой физики}
+\def\labnumber{1}
+\def\labtheme{Исследование динамики систем с разрывными колебаниями}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%применим колонтитул к стилю страницы
+\pagestyle{fancy} 
+	%очистим "шапку" страницы
+\fancyhead{} 
+	%слева сверху на четных и справа на нечетных
+\fancyhead[L]{\labauthors} 
+	%справа сверху на четных и слева на нечетных
+%\fancyhead[R]{Отчёт по лабораторной работе №\labnumber} 
+	%очистим "подвал" страницы
+\fancyfoot{} 
+	% номер страницы в нижнем колинтуле в центре
+\fancyfoot[C]{\thepage} 
+\renewcommand{\phi}{\varphi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{float}
+\usepackage[mode=buildnew]{standalone}
+\usepackage{tikz} 
+% \usepackage{subcaption}
+\usepackage{tikz,csvsimple}
+\usetikzlibrary{scopes}
+\usetikzlibrary{%
+     decorations.pathreplacing,%
+     decorations.pathmorphing,%
+    patterns,%
+    calc,%
+    scopes,%
+    arrows,%
+    % arrows.spaced,%
+}
+\makeatletter
+\newif\if@gather@prefix 
+\preto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\gdisplaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag@gather{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\preto\place@tag{% 
+  \if@gather@prefix\iftagsleft@ 
+    \kern-\gdisplaywidth@ 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth@ 
+  \fi\fi 
+} 
+\appto\place@tag{% 
+  \if@gather@prefix\iftagsleft@\else 
+    \kern-\displaywidth 
+    \rlap{\gather@prefix}% 
+    \kern\displaywidth 
+  \fi\fi 
+  \global\@gather@prefixfalse 
+} 
+\newcommand*{\beforetext}[1]{% 
+  \ifmeasuring@\else
+  \gdef\gather@prefix{#1}% 
+  \global\@gather@prefixtrue 
+  \fi
+} 
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{pgfplots, pgfplotstable}
+
+\usepackage[outline]{contour}
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % for parts
+% \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+\usepackage{pgfplots,pgfplotstable,booktabs,colortbl}
+\pgfplotsset{compat=newest}
+\usepackage{physics}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs=true}
+\newcommand\Smat{\hat { \mathbf { S } }}
+
+\newcommand*\dotvec[1][1,1]{\crossproducttemp#1\relax}
+\def\crossproducttemp#1,#2\relax{{\qty[\vec{#1}\times\vec{#2}\,]}}
+
+\newcommand*\prodvec[1][1,1]{\crossproducttempa#1\relax}
+\def\crossproducttempa#1,#2\relax{{\qty[{#1}\times{#2}\,]}}
+
+% \def\E{\mathscr{E}_H}
+\def\Rdim{\,\frac{\text{м}^3}{\text{А} \cdot \text{с}}}
+
+\renewcommand{\vec}{\mathbf} % for parts
+
+
+\begin{document}
+	\begin{titlepage}
+
+		\begin{center}
+			
+			
+			\textsc{Нижегородский государственный университет имени Н.\,И. Лобачевского}
+			\vskip 4pt \hrule \vskip 8pt
+			\textsc{Радиофизический факультет}
+			
+			\vfill
+			
+			{\Large\labtheme}
+			
+		\end{center}
+		
+		\vfill
+		
+		\begin{flushright}
+			{Работу выполнили студенты\\ \labauthors\\ 430 группы}
+		\end{flushright}
+		
+		\vfill
+		
+		\begin{center}
+			Нижний Новгород, \the\year
+		\end{center}
+	\end{titlepage}
+%	\tableofcontents
+	\newpage 
+
+\section*{Практическая часть}
+\subsection*{Измерение периода и амплитуды колебаний мультивибратора}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{photo/IMG_3234}
+	\caption{Осциллограммы колебаний напряжения и тока}
+\end{figure}
+Измерили амплитуду и период колебаний напряжения мультивибратора. Амплитуда $A=1,04\:\text{В}$, период $A=56\:\text{мкс}$.
+Сфотографировали фазовую плоскость мультивибратора с осциллографа.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{photo/IMG_3240}
+	\caption{фазовая плоскость мультивибратора}
+\end{figure}
+\subsection*{Режим триггера}
+Перевели схему в режим триггера, измерили длительность снимаемого импульса $\tau = 36\text{мкс}$.
+Измерили минимальные и максимальные значения длительности запускающих импульсов, когда схема работает как триггер и переключает состояния $\tau_{max} = ?\:\text{мкс}$, $\tau_{min} = 11,5\:\text{мкс}$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{photo/IMG_3244}
+%	\caption{осциллограмма режим триггера}
+\end{figure}
+\subsubsection*{Осциллограммы напряжения на выходе триггера при делении частоты на триггере}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{photo/IMG_3248}
+\end{figure}
+\subsection*{Режим кипп - реле}
+Для схемы кипп-реле измерили длительность выходного сигнала $\tau = ?\:\text{мкс}$. Измерили минимальные и максимальные значения длительности запускающих импульсов, когда схема работает как кипп-реле $\tau_{max} = ?\:\text{мкс}$, $\tau_{min} = 11,5\:\text{мкс}$.
+
+Выяснили, что при амплитудах входного импульса, лежащего в диапазоне $0.325\:\text{В}<\tau<1,6\:\text{В}$, спусковая схема запускается и работает как кипп-реле.
+\end{document}
